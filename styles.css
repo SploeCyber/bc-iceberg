@@ -53,6 +53,9 @@ header h1 {
   margin-right: 5px;
   border-radius: 3px;
   cursor: pointer;
+
+  /* Add padding to reduce the background size */
+  padding: 3px 8px;
 }
 
 .tag:hover {
