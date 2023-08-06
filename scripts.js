@@ -13,10 +13,11 @@ async function fetchData() {
 }
 
 function displayData(entries) {
+  const sortedEntries = entries.sort((a, b) => (a.tier || 0) - (b.tier || 0));
   const tabsContainer = document.getElementById('tabsContainer');
   tabsContainer.innerHTML = '';
 
-  entries.forEach(entry => {
+  sortedEntries.forEach(entry => {
     const entryDiv = createEntryDiv(entry);
     tabsContainer.appendChild(entryDiv);
   });
