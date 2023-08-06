@@ -1,67 +1,108 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f0f0;
 }
 
-h1 {
-    text-align: center;
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+header.navbar {
+  background-color: #333;
+  color: #fff;
+  padding: 1rem 0;
+}
+
+header.navbar h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+main {
+  margin-top: 2rem;
 }
 
 .tabs {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .tab-link {
-    padding: 10px 20px;
-    background-color: #f9f9f9;
-    border: 1px solid #ccc;
-    cursor: pointer;
-    margin-right: 10px;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border: 1px solid #333;
+  border-radius: 5px;
+  margin: 0.5rem;
+  background-color: #fff;
+  color: #333;
+  transition: background-color 0.3s ease;
 }
 
 .tab-link.active {
-    background-color: #ccc;
+  background-color: #333;
+  color: #fff;
 }
 
 .tab {
-    display: none;
+  display: none;
 }
 
 .tab.active {
-    display: block;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .tab-content {
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin-bottom: 20px;
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  padding: 1rem;
+  margin: 1rem 0;
+  width: 100%;
+  max-width: 300px;
 }
 
-.tab img {
-    display: block;
-    max-width: 100%;
-    max-height: 200px;
-    margin: 10px auto;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.tab-content h2 {
+  font-size: 1.2rem;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
 }
 
-.tab h2 {
-    margin-bottom: 10px;
+.tab-content p {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
 }
 
-.tab p {
-    margin-bottom: 15px;
-    line-height: 1.5;
+.tab-content img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 0.5rem;
 }
 
-.tab p:last-child {
-    margin-bottom: 0;
+.tags {
+  margin-top: 0.5rem;
 }
 
-.tab p.tags {
-    font-weight: bold;
+.tag {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  background-color: #333;
+  color: #fff;
+  font-size: 0.8rem;
+  border-radius: 3px;
+  margin-right: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.tag:hover {
+  background-color: #444;
 }

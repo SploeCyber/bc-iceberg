@@ -110,7 +110,7 @@
       const tags = tabContent.querySelectorAll('.tag');
       if (tags.length > 0) {
         const containsTag = Array.from(tags).some(tagElement => tagElement.getAttribute('data-tag') === tag);
-        tabContent.style.display = containsTag ? 'block' : 'none';
+        tabContent.style.display = containsTag ? 'flex' : 'none';
       }
     });
   }
