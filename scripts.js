@@ -49,14 +49,12 @@ function createEntryDiv(entry) {
   tierTag.textContent = `Tier: ${entry.tier || 'N/A'}`;
   entryDiv.appendChild(tierTag);
 
-  const tags = document.createElement('p');
-  tags.classList.add('tags');
   if (entry.tags && entry.tags.length > 0) {
+    const tags = document.createElement('p');
+    tags.classList.add('tags');
     tags.innerHTML = `Tags: ${entry.tags.map(tag => `<span class="tag" data-tag="${tag}">${tag}</span>`).join(', ')}`;
-  } else {
-    tags.textContent = 'Tags: N/A';
+    entryDiv.appendChild(tags);
   }
-  entryDiv.appendChild(tags);
 
   return entryDiv;
 }
