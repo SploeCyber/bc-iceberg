@@ -29,9 +29,33 @@ function createEntryDiv(entry) {
   entryDiv.classList.add('tab-content');
   entryDiv.dataset.tier = entry.tier || 'N/A';
 
+  const title = document.createElement('h2');
+  title.textContent = entry.name;
+  entryDiv.appendChild(title);
+
   const descriptionElement = document.createElement('p');
   descriptionElement.innerHTML = entry.description;
   entryDiv.appendChild(descriptionElement);
+
+  if (entry.media && entry.mediaType === 'image') {
+    const media = document.createElement('img');
+    media.setAttribute('src', entry.media);
+    media.setAttribute('alt', entry.name);
+    entryDiv.appendChild(media);
+  }
+
+  const tierTag = document.createElement('p');
+  tierTag.textContent = `Tier: ${entry.tier || 'N/A'}`;
+  entryDiv.appendChild(tierTag);
+
+  const tags = document.createElement('p');
+  tags.classList.add('tags');
+  if (entry.tags && entry.tags.length > 0) {
+    tags.innerHTML = `Tags: ${entry.tags.map(tag => `<span class="tag" data-tag="${tag}">${tag}</span>`).join(', ')}`;
+  } else {
+    tags.textContent = 'Tags: N/A';
+  }
+  entryDiv.appendChild(tags);
 
   return entryDiv;
 }
