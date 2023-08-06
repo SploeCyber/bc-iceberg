@@ -1,13 +1,14 @@
 (async function () {
   const tabsContainer = document.getElementById('tabsContainer');
 
-  function fetchData() {
-    return fetch('entries.json')
-      .then(response => response.json())
-      .catch(error => {
-        console.error('Error fetching data:', error);
-        return [];
-      });
+  async function fetchData() {
+    try {
+      const response = await fetch('entries.json');
+      return await response.json();
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      return [];
+    }
   }
 
   function displayData(entries) {
@@ -22,12 +23,12 @@
       entryDiv.dataset.tier = entry.tier || 'N/A';
 
       const title = document.createElement('h2');
-      title.innerHTML = entry.name;
+      title.textContent = entry.name;
       entryDiv.appendChild(title);
 
       if (entry.description) {
         const description = document.createElement('p');
-        description.innerHTML = entry.description;
+        description.textContent = entry.description;
         entryDiv.appendChild(description);
       }
 
@@ -91,7 +92,7 @@
       const tabContent = document.createElement('div');
       tabContent.classList.add('tab');
       tabContent.setAttribute('id', `tier${tier}`);
-      document.body.appendChild(tabContent);
+      tabsContainer.appendChild(tabContent);
     });
   }
 
