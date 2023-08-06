@@ -1,13 +1,10 @@
 body {
     font-family: Arial, sans-serif;
     margin: 20px;
-    background-color: #222;
-    color: #eee;
 }
 
 h1 {
     text-align: center;
-    color: #fff;
 }
 
 .tabs {
@@ -18,15 +15,14 @@ h1 {
 
 .tab-link {
     padding: 10px 20px;
-    background-color: #333;
-    border: 1px solid #444;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
     cursor: pointer;
     margin-right: 10px;
-    color: #eee;
 }
 
 .tab-link.active {
-    background-color: #555;
+    background-color: #ccc;
 }
 
 .tab {
@@ -38,10 +34,10 @@ h1 {
 }
 
 .tab-content {
-    border: 1px solid #444;
-    padding: 20px;
+    border: 1px solid #ccc;
+    padding: 10px;
     margin-bottom: 20px;
-    background-color: #333;
+    background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -55,13 +51,11 @@ h1 {
 
 .tab h2 {
     margin-bottom: 10px;
-    color: #eee;
 }
 
 .tab p {
     margin-bottom: 15px;
     line-height: 1.5;
-    color: #ccc;
 }
 
 .tab p:last-child {
@@ -70,5 +64,4 @@ h1 {
 
 .tab p.tags {
     font-weight: bold;
-    color: #007BFF;
 }
