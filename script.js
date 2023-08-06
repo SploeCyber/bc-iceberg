@@ -91,7 +91,7 @@
       const tabContent = document.createElement('div');
       tabContent.classList.add('tab');
       tabContent.setAttribute('id', `tier${tier}`);
-      tabsContainer.appendChild(tabContent);
+      document.body.appendChild(tabContent);
     });
   }
 
