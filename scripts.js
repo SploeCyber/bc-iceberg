@@ -18,13 +18,7 @@
   function displayData(entries) {
     tabsContainer.innerHTML = '';
 
-    const sortedEntries = entries.sort((a, b) => {
-      const tierA = a.tier || 'N/A';
-      const tierB = b.tier || 'N/A';
-      return tierA.localeCompare(tierB);
-    });
-
-    sortedEntries.forEach(entry => {
+    entries.forEach(entry => {
       const entryDiv = createEntryDiv(entry);
       tabsContainer.appendChild(entryDiv);
     });
