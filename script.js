@@ -1,12 +1,50 @@
 async function fetchData() {
     try {
-        const response = await fetch('entries.json'); // Fetch from local file
+        const response = await fetch('entries.json');
         const data = await response.json();
         return data;
     } catch (error) {
         console.error('Error fetching data:', error);
         return [];
     }
+}
+
+function displayData(entries) {
+    entries.forEach((entry) => {
+        const entryDiv = document.createElement('div');
+        entryDiv.classList.add('tab-content');
+
+        const title = document.createElement('h2');
+        title.innerHTML = entry.name;
+        entryDiv.appendChild(title);
+
+        if (entry.description) {
+            const description = document.createElement('p');
+            description.innerHTML = entry.description;
+            entryDiv.appendChild(description);
+        }
+
+        if (entry.media && entry.mediaType === 'image' && entry.media !== 'none') {
+            const media = document.createElement('img');
+            media.setAttribute('src', `media/${entry.media}`);
+            media.setAttribute('alt', entry.name);
+            entryDiv.appendChild(media);
+        }
+
+        const tierTag = document.createElement('p');
+        tierTag.textContent = `Tier: ${entry.tier || 'N/A'}`;
+        entryDiv.appendChild(tierTag);
+
+        const tags = document.createElement('p');
+        tags.classList.add('tags');
+        tags.textContent = `Tags: ${entry.tags ? entry.tags.join(', ') : 'N/A'}`;
+        entryDiv.appendChild(tags);
+
+        const tierTab = document.getElementById(`tier${entry.tier}`);
+        if (tierTab) {
+            tierTab.appendChild(entryDiv);
+        }
+    });
 }
 
 function findUniqueTiers(entries) {
@@ -29,44 +67,6 @@ function createTabs(uniqueTiers) {
         tabContent.classList.add('tab');
         tabContent.setAttribute('id', `tier${tier}`);
         document.body.appendChild(tabContent);
-    });
-}
-
-function displayData(entries) {
-    entries.forEach((entry) => {
-        const entryDiv = document.createElement('div');
-        entryDiv.classList.add('tab-content');
-
-        const title = document.createElement('h2');
-        title.innerHTML = entry.name;
-        entryDiv.appendChild(title);
-
-        if (entry.description) {
-            const description = document.createElement('p');
-            description.innerHTML = entry.description;
-            entryDiv.appendChild(description);
-        }
-
-        if (entry.media && entry.mediaType === 'image' && entry.media !== 'none') {
-            const media = document.createElement('img');
-            media.setAttribute('src', `https://raw.githubusercontent.com/SploeCyber/BattleCatsIceberg/main/media/${entry.media}`);
-            media.setAttribute('alt', entry.name);
-            entryDiv.appendChild(media);
-        }
-
-        const tierTag = document.createElement('p');
-        tierTag.textContent = `Tier: ${entry.tier || 'N/A'}`;
-        entryDiv.appendChild(tierTag);
-
-        const tags = document.createElement('p');
-        tags.classList.add('tags');
-        tags.textContent = `Tags: ${entry.tags ? entry.tags.join(', ') : 'N/A'}`;
-        entryDiv.appendChild(tags);
-
-        const tierTab = document.getElementById(`tier${entry.tier}`);
-        if (tierTab) {
-            tierTab.appendChild(entryDiv);
-        }
     });
 }
 
