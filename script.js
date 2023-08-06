@@ -11,8 +11,10 @@
   }
 
   function displayData(entries) {
-    const allTags = new Set();
-    const entryElements = [];
+    tabsContainer.innerHTML = '';
+
+    const uniqueTiers = findUniqueTiers(entries);
+    createTabs(uniqueTiers);
 
     entries.forEach(entry => {
       const entryDiv = document.createElement('div');
@@ -43,47 +45,15 @@
       const tags = document.createElement('p');
       tags.classList.add('tags');
       if (entry.tags) {
-        entry.tags.forEach(tag => allTags.add(tag));
         tags.innerHTML = `Tags: ${entry.tags.map(tag => `<span class="tag" data-tag="${tag}">${tag}</span>`).join(', ')}`;
       } else {
         tags.textContent = 'Tags: N/A';
       }
       entryDiv.appendChild(tags);
 
-      entryElements.push(entryDiv);
-    });
-
-    tabsContainer.innerHTML = '';
-
-    const uniqueTiers = findUniqueTiers(entries);
-    uniqueTiers.forEach(tier => {
-      const tabLink = document.createElement('div');
-      tabLink.classList.add('tab-link');
-      tabLink.textContent = `Tier ${tier}`;
-      tabLink.setAttribute('data-tab', `tier${tier}`);
-      tabsContainer.appendChild(tabLink);
-
-      const tabContent = document.createElement('div');
-      tabContent.classList.add('tab');
-      tabContent.setAttribute('id', `tier${tier}`);
-      document.body.appendChild(tabContent);
-    });
-
-    const tagsContainer = document.createElement('div');
-    tagsContainer.classList.add('tags-container');
-    allTags.forEach(tag => {
-      const tagElement = document.createElement('span');
-      tagElement.classList.add('tag');
-      tagElement.textContent = tag;
-      tagElement.setAttribute('data-tag', tag);
-      tagsContainer.appendChild(tagElement);
-    });
-    document.body.appendChild(tagsContainer);
-
-    entryElements.forEach(entryElement => {
-      const tierTab = document.getElementById(`tier${entryElement.dataset.tier}`);
+      const tierTab = document.getElementById(`tier${entry.tier}`);
       if (tierTab) {
-        tierTab.appendChild(entryElement);
+        tierTab.appendChild(entryDiv);
       }
     });
 
@@ -127,16 +97,10 @@
 
   function switchTab(tabName) {
     const tabs = document.querySelectorAll('.tab');
-    tabs.forEach(tab => tab.classList.remove('active'));
+    tabs.forEach(tab => tab.classList.toggle('active', tab.id === tabName));
 
     const tabLinks = document.querySelectorAll('.tab-link');
-    tabLinks.forEach(tabLink => tabLink.classList.remove('active'));
-
-    const selectedTab = document.getElementById(tabName);
-    selectedTab.classList.add('active');
-
-    const selectedTabLink = document.querySelector(`[data-tab="${tabName}"]`);
-    selectedTabLink.classList.add('active');
+    tabLinks.forEach(tabLink => tabLink.classList.toggle('active', tabLink.getAttribute('data-tab') === tabName));
   }
 
   function filterByTag(tag) {
@@ -151,15 +115,5 @@
   }
 
   const data = await fetchData();
-  const uniqueTiers = findUniqueTiers(data);
-  createTabs(uniqueTiers);
   displayData(data);
-
-  const tabLinks = document.querySelectorAll('.tab-link');
-  tabLinks.forEach(tabLink => {
-    tabLink.addEventListener('click', () => {
-      const tabName = tabLink.getAttribute('data-tab');
-      switchTab(tabName);
-    });
-  });
 })();
