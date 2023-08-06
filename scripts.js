@@ -34,20 +34,7 @@ function createEntryDiv(entry) {
   entryDiv.appendChild(title);
 
   const descriptionElement = document.createElement('p');
-  const maxDescriptionLength = 100; // Set your desired maximum length
-  if (entry.description.length > maxDescriptionLength) {
-    descriptionElement.innerHTML = entry.description.substring(0, maxDescriptionLength) + '...';
-    const readMoreLink = document.createElement('a');
-    readMoreLink.href = '#';
-    readMoreLink.textContent = 'Read More';
-    readMoreLink.addEventListener('click', (event) => {
-      event.preventDefault();
-      descriptionElement.innerHTML = entry.description;
-    });
-    entryDiv.appendChild(readMoreLink);
-  } else {
-    descriptionElement.innerHTML = entry.description;
-  }
+  descriptionElement.innerHTML = entry.description;
   entryDiv.appendChild(descriptionElement);
 
   if (entry.media && entry.mediaType === 'image') {
