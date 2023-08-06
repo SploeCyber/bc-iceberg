@@ -30,8 +30,7 @@ function createEntryDiv(entry) {
   entryDiv.dataset.tier = entry.tier || 'N/A';
 
   const title = document.createElement('h2');
-  const titleText = document.createTextNode(entry.name);
-  title.appendChild(titleText);
+  title.innerHTML = entry.name; // Use innerHTML to render HTML tags
   entryDiv.appendChild(title);
 
   const descriptionElement = document.createElement('p');
