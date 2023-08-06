@@ -30,11 +30,13 @@ function createEntryDiv(entry) {
   entryDiv.dataset.tier = entry.tier || 'N/A';
 
   const title = document.createElement('h2');
-  title.textContent = entry.name;
+  const titleText = document.createTextNode(entry.name);
+  title.appendChild(titleText);
   entryDiv.appendChild(title);
 
   const descriptionElement = document.createElement('p');
-  descriptionElement.innerHTML = entry.description;
+  const descriptionText = document.createTextNode(entry.description);
+  descriptionElement.appendChild(descriptionText);
   entryDiv.appendChild(descriptionElement);
 
   if (entry.media && entry.mediaType === 'image') {
