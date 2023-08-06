@@ -18,39 +18,18 @@
   function displayData(entries) {
     tabsContainer.innerHTML = '';
 
-    const uniqueTiers = findUniqueTiers(entries);
-    createTabs(uniqueTiers);
+    const sortedEntries = entries.sort((a, b) => {
+      const tierA = a.tier || 'N/A';
+      const tierB = b.tier || 'N/A';
+      return tierA.localeCompare(tierB);
+    });
 
-    entries.forEach(entry => {
+    sortedEntries.forEach(entry => {
       const entryDiv = createEntryDiv(entry);
-      const tierTab = document.getElementById(`tier${entry.tier}`);
-      if (tierTab) {
-        tierTab.appendChild(entryDiv);
-      }
+      tabsContainer.appendChild(entryDiv);
     });
 
-    addTabEventListeners();
     addTagEventListeners();
-  }
-
-  function findUniqueTiers(entries) {
-    const uniqueTiers = new Set(entries.map(entry => entry.tier).filter(Boolean));
-    return Array.from(uniqueTiers).sort();
-  }
-
-  function createTabs(uniqueTiers) {
-    uniqueTiers.forEach(tier => {
-      const tabLink = document.createElement('div');
-      tabLink.classList.add('tab-link');
-      tabLink.textContent = `Tier ${tier}`;
-      tabLink.setAttribute('data-tab', `tier${tier}`);
-      tabsContainer.appendChild(tabLink);
-
-      const tabContent = document.createElement('div');
-      tabContent.classList.add('tab');
-      tabContent.setAttribute('id', `tier${tier}`);
-      tabsContainer.appendChild(tabContent);
-    });
   }
 
   function createEntryDiv(entry) {
@@ -91,16 +70,6 @@
     return entryDiv;
   }
 
-  function addTabEventListeners() {
-    const tabLinks = document.querySelectorAll('.tab-link');
-    tabLinks.forEach(tabLink => {
-      tabLink.addEventListener('click', () => {
-        const tabName = tabLink.getAttribute('data-tab');
-        switchTab(tabName);
-      });
-    });
-  }
-
   function addTagEventListeners() {
     const tagElements = document.querySelectorAll('.tag');
     tagElements.forEach(tagElement => {
@@ -108,34 +77,6 @@
         const selectedTag = tagElement.getAttribute('data-tag');
         filterByTag(selectedTag);
       });
-    });
-  }
-
-  function switchTab(tabName) {
-    const tabs = document.querySelectorAll('.tab');
-    tabs.forEach(tab => tab.classList.toggle('active', tab.id === tabName));
-
-    const tabLinks = document.querySelectorAll('.tab-link');
-    tabLinks.forEach(tabLink => tabLink.classList.toggle('active', tabLink.getAttribute('data-tab') === tabName));
-
-    const allTabContent = document.querySelectorAll('.tab-content');
-    allTabContent.forEach(tabContent => {
-      if (tabContent.dataset.tier === tabName.slice(4)) {
-        tabContent.style.display = 'flex';
-      } else {
-        tabContent.style.display = 'none';
-      }
-    });
-  }
-
-  function filterByTag(tag) {
-    const allTabContent = document.querySelectorAll('.tab-content');
-    allTabContent.forEach(tabContent => {
-      const tags = tabContent.querySelectorAll('.tag');
-      if (tags.length > 0) {
-        const containsTag = Array.from(tags).some(tagElement => tagElement.getAttribute('data-tag') === tag);
-        tabContent.style.display = containsTag ? 'flex' : 'none';
-      }
     });
   }
 
