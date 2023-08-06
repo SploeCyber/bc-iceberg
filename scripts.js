@@ -30,12 +30,11 @@ function createEntryDiv(entry) {
   entryDiv.dataset.tier = entry.tier || 'N/A';
 
   const title = document.createElement('h2');
-  title.innerHTML = entry.name; // Use innerHTML to render HTML tags
+  title.innerHTML = entry.name; // Use innerHTML to render HTML tags in title
   entryDiv.appendChild(title);
 
   const descriptionElement = document.createElement('p');
-  const descriptionText = document.createTextNode(entry.description);
-  descriptionElement.appendChild(descriptionText);
+  descriptionElement.innerHTML = entry.description; // Use innerHTML to render HTML tags in description
   entryDiv.appendChild(descriptionElement);
 
   if (entry.media && entry.mediaType === 'image') {
