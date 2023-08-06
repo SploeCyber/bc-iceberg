@@ -1,7 +1,18 @@
+let cachedData = null;
+let lastFetchedTime = 0;
+const cacheDuration = 3 * 60 * 60 * 1000;
+
 async function fetchData() {
+    const currentTime = Date.now();
+    if (cachedData && currentTime - lastFetchedTime < cacheDuration) {
+        return cachedData;
+    }
+
     try {
         const response = await fetch('entries.json');
         const data = await response.json();
+        cachedData = data;
+        lastFetchedTime = currentTime;
         return data;
     } catch (error) {
         console.error('Error fetching data:', error);
