@@ -37,7 +37,7 @@ function createEntryDiv(entry) {
   descriptionElement.innerHTML = entry.description; // Use innerHTML to render HTML tags in description
   entryDiv.appendChild(descriptionElement);
 
-  if (entry.media && entry.mediaType === 'image') {
+  if (entry.media && entry.mediaType === 'image' && entry.media !== 'none') {
     const media = document.createElement('img');
     media.setAttribute('src', `media/${entry.media}`);
     media.setAttribute('alt', entry.name);
