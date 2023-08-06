@@ -102,6 +102,15 @@
 
     const tabLinks = document.querySelectorAll('.tab-link');
     tabLinks.forEach(tabLink => tabLink.classList.toggle('active', tabLink.getAttribute('data-tab') === tabName));
+
+    const allTabContent = document.querySelectorAll('.tab-content');
+    allTabContent.forEach(tabContent => {
+      if (tabContent.dataset.tier === tabName.slice(4)) {
+        tabContent.style.display = 'flex';
+      } else {
+        tabContent.style.display = 'none';
+      }
+    });
   }
 
   function filterByTag(tag) {
