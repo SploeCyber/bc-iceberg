@@ -18,10 +18,11 @@
 
     entries.forEach(entry => {
       const entryDiv = document.createElement('div');
-      entryDiv.classList.add('tab-content');
+      entryDiv.classList.add('tab-content', 'col-12', 'col-md-6', 'col-lg-4');
       entryDiv.dataset.tier = entry.tier || 'N/A';
 
       const title = document.createElement('h2');
+      title.classList.add('h4', 'mb-3');
       title.innerHTML = entry.name;
       entryDiv.appendChild(title);
 
@@ -33,19 +34,21 @@
 
       if (entry.media && entry.mediaType === 'image' && entry.media !== 'none') {
         const media = document.createElement('img');
+        media.classList.add('img-fluid', 'mb-3');
         media.setAttribute('src', `media/${entry.media}`);
         media.setAttribute('alt', entry.name);
         entryDiv.appendChild(media);
       }
 
       const tierTag = document.createElement('p');
+      tierTag.classList.add('mb-1');
       tierTag.textContent = `Tier: ${entry.tier || 'N/A'}`;
       entryDiv.appendChild(tierTag);
 
       const tags = document.createElement('p');
-      tags.classList.add('tags');
+      tags.classList.add('mb-0');
       if (entry.tags) {
-        tags.innerHTML = `Tags: ${entry.tags.map(tag => `<span class="tag" data-tag="${tag}">${tag}</span>`).join(', ')}`;
+        tags.innerHTML = `Tags: ${entry.tags.map(tag => `<a class="tag badge badge-info mr-1" href="#" data-tag="${tag}">${tag}</a>`).join('')}`;
       } else {
         tags.textContent = 'Tags: N/A';
       }
@@ -83,15 +86,15 @@
   function createTabs(uniqueTiers) {
     uniqueTiers.forEach(tier => {
       const tabLink = document.createElement('div');
-      tabLink.classList.add('tab-link');
+      tabLink.classList.add('tab-link', 'col-6', 'col-md-4');
       tabLink.textContent = `Tier ${tier}`;
       tabLink.setAttribute('data-tab', `tier${tier}`);
       tabsContainer.appendChild(tabLink);
 
       const tabContent = document.createElement('div');
-      tabContent.classList.add('tab');
+      tabContent.classList.add('tab', 'row', 'mb-4');
       tabContent.setAttribute('id', `tier${tier}`);
-      document.body.appendChild(tabContent);
+      tabsContainer.appendChild(tabContent);
     });
   }
 
