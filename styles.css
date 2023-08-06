@@ -8,8 +8,13 @@ body {
 header {
   background-color: #333;
   color: #fff;
-  padding: 10px;
+  padding: 20px 0;
   text-align: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 32px;
 }
 
 .tabs-container {
@@ -17,6 +22,7 @@ header {
   flex-wrap: wrap;
   gap: 10px;
   margin: 20px;
+  justify-content: center; /* Center the tabsContainer horizontally */
 }
 
 .tab-link {
